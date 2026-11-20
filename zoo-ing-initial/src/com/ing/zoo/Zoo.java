@@ -1,38 +1,69 @@
 package com.ing.zoo;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Zoo {
-    public static void main(String[] args)
-    {
-        String[] commands = new String[4];
-        commands[0] = "hello";
-        commands[1] = "give leaves";
-        commands[2] = "give meat";
-        commands[3] = "perform trick";
+    private final List<Animal> animals = Arrays.asList(
+            new Lion(),
+            new Hippo(),
+            new Pig(),
+            new Tiger(),
+            new Zebra(),
+            new Giraffe(),
+            new Monkey()
+    );
 
-        Lion henk = new Lion();
-        henk.name = "henk";
-        Hippo elsa = new Hippo();
-        elsa.name = "elsa";
-        Pig dora = new Pig();
-        dora.name = "dora";
-        Tiger wally = new Tiger();
-        wally.name = "wally";
-        Zebra marty = new Zebra();
-        marty.name = "marty";
+    public static void main(String[] args) {
+        new Zoo().run();
+    }
 
+    private void run() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Voer uw command in: ");
+        while (scanner.hasNextLine()) {
+            String command = scanner.nextLine().trim();
+            if (command.isEmpty()) {
+                continue;
+            }
+            if (command.equalsIgnoreCase("exit")) {
+                return;
+            }
+            execute(command);
+        }
+    }
 
-        String input = scanner.nextLine();
-        if(input.equals(commands[0] + " henk"))
-        {
-            henk.sayHello();
+    void execute(String command) {
+        String normalized = command.trim().toLowerCase(Locale.ENGLISH);
+        if (normalized.equals("hello")) {
+            animals.forEach(Animal::sayHello);
+        } else if (normalized.startsWith("hello ")) {
+            sayHelloTo(normalized.substring("hello ".length()).trim());
+        } else if (normalized.equals("give leaves")) {
+            animals.stream()
+                    .filter(animal -> animal instanceof Herbivore)
+                    .forEach(animal -> ((Herbivore) animal).eatLeaves());
+        } else if (normalized.equals("give meat")) {
+            animals.stream()
+                    .filter(animal -> animal instanceof Carnivore)
+                    .forEach(animal -> ((Carnivore) animal).eatMeat());
+        } else if (normalized.equals("perform trick")) {
+            animals.stream()
+                    .filter(animal -> animal instanceof TrickPerformer)
+                    .forEach(animal -> ((TrickPerformer) animal).performTrick());
+        } else {
+            System.out.println("Unknown command: " + command);
         }
-        else
-        {
-            System.out.println("Unknown command: " + input);
+    }
+
+    private void sayHelloTo(String name) {
+        for (Animal animal : animals) {
+            if (animal.name.equalsIgnoreCase(name)) {
+                animal.sayHello();
+                return;
+            }
         }
+        System.out.println("Unknown animal: " + name);
     }
 }

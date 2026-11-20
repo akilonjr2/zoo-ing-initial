@@ -2,40 +2,29 @@ package com.ing.zoo;
 
 import java.util.Random;
 
-public class Tiger {
-    public String name;
-    public String helloText;
-    public String eatText;
-    public String trick;
+public class Tiger extends Animal implements Carnivore, TrickPerformer {
+    private final Random random = new Random();
 
-    public Tiger()
-    {
+    public Tiger() {
+        this("wally");
     }
 
-    public void sayHello()
-    {
-        helloText = "rraaarww";
-        System.out.println(helloText);
+    public Tiger(String name) {
+        super(name);
     }
 
-    public void eatMeat()
-    {
-        eatText = "nomnomnom oink wubalubadubdub";
-        System.out.println(eatText);
+    @Override
+    public void sayHello() {
+        System.out.println("rraaarww");
     }
 
-    public void performTrick()
-    {
-        Random random = new Random();
-        int rnd = random.nextInt(2);
-        if(rnd == 0)
-        {
-            trick = "jumps in tree";
-        }
-        else
-        {
-            trick = "scratches ears";
-        }
-        System.out.println(trick);
+    @Override
+    public void eatMeat() {
+        System.out.println("nomnomnom oink wubalubadubdub");
+    }
+
+    @Override
+    public void performTrick() {
+        System.out.println(random.nextBoolean() ? "jumps in tree" : "scratches ears");
     }
 }
