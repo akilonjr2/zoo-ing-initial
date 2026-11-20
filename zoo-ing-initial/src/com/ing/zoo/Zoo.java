@@ -22,7 +22,7 @@ public class Zoo {
             new Monkey()
     );
 
-    public static void main(String[] args) {
+    static void main() {
         new Zoo().run();
     }
 
