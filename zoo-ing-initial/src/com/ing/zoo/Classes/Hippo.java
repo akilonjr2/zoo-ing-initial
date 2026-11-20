@@ -1,4 +1,7 @@
-package com.ing.zoo;
+package com.ing.zoo.Classes;
+
+import com.ing.zoo.Classes.Abstracts.Animal;
+import com.ing.zoo.Interfaces.Herbivore;
 
 public class Hippo extends Animal implements Herbivore {
     public Hippo() {
@@ -11,7 +14,7 @@ public class Hippo extends Animal implements Herbivore {
 
     @Override
     public void sayHello() {
-        System.out.println("splash");
+        System.out.println("splash splash");
     }
 
     @Override

@@ -1,5 +1,11 @@
 package com.ing.zoo;
 
+import com.ing.zoo.Classes.*;
+import com.ing.zoo.Classes.Abstracts.Animal;
+import com.ing.zoo.Interfaces.Carnivore;
+import com.ing.zoo.Interfaces.Herbivore;
+import com.ing.zoo.Interfaces.TrickPerformer;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -21,6 +27,7 @@ public class Zoo {
     }
 
     private void run() {
+        System.out.print("Voer uw command in: ");
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             String command = scanner.nextLine().trim();
@@ -31,6 +38,7 @@ public class Zoo {
                 return;
             }
             execute(command);
+            System.out.print("Voer uw command in: ");
         }
     }
 

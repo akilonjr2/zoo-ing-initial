@@ -1,4 +1,7 @@
-package com.ing.zoo;
+package com.ing.zoo.Classes;
+
+import com.ing.zoo.Classes.Abstracts.Animal;
+import com.ing.zoo.Interfaces.Carnivore;
 
 public class Lion extends Animal implements Carnivore {
     public Lion() {

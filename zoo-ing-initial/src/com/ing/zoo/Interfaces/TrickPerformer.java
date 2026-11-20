@@ -1,4 +1,4 @@
-package com.ing.zoo;
+package com.ing.zoo.Interfaces;
 
 public interface TrickPerformer {
     void performTrick();
